@@ -1,3 +1,7 @@
+* {
+    font-family: Google Sans;
+}
+
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;

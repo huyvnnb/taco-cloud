@@ -3,10 +3,12 @@ package com.huyvnnb.taco_cloud.controller;
 import com.huyvnnb.taco_cloud.model.Design;
 import com.huyvnnb.taco_cloud.model.Ingredient;
 import com.huyvnnb.taco_cloud.model.Taco;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import com.huyvnnb.taco_cloud.model.Ingredient.Type;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,7 +51,10 @@ public class DesignTacoController {
     }
 
     @PostMapping
-    public String processDesign(Design design){
+    public String processDesign(@Valid Taco design, Errors errors){
+        if(errors.hasErrors()){
+            return "design";
+        }
         //Save the taco design
         log.info("Processing design: " + design);
         return "redirect:/orders/current";
